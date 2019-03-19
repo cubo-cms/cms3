@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "1",
+    "accesslevel": "1",
+    "name": "published",
+    "status": "1",
+    "title": "Published"
+  },
+  {
+    "_id": "2",
+    "accesslevel": "1",
+    "name": "unpublished",
+    "status": "1",
+    "title": "Not published"
+  },
+  {
+    "_id": "3",
+    "accesslevel": "1",
+    "name": "trashed",
+    "status": "1",
+    "title": "Trashed"
+  },
+  {
+    "_id": "4",
+    "accesslevel": "1",
+    "name": "archived",
+    "status": "1",
+    "title": "Archived"
+  }
+]

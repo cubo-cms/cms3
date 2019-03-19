@@ -1,0 +1,13 @@
+{
+  "name": "myWebApp",
+  "title": "My Web App",
+  "description": "This is my Web App",
+  "author": "papiando",
+  "routes": {
+    "/{{controller}}": { "method": "all" },
+    "/{{controller}}/{{name}}": { "method": "read" },
+    "/{{controller}}/read/{{name}}": { "method": "read" },
+    "/{{controller}}/status/{{status}}": { "method": "status" },
+    "/{{controller}}/category/{{category}}": { "method": "category" }
+  }
+}

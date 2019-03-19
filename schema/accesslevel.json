@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://cubo-cms.com/schema/accesslevel.json",
+  "type": "object",
+  "properties": {
+    "_id": { "type": "integer" },
+    "accesslevel": { "$ref": "accesslevel.json" },
+    "author": { "$ref": "user.json" },
+    "created": { "type": "date-time" },
+    "description": { "type": "text" },
+    "editor": { "$ref": "user.json" },
+    "modified": { "type": "date-time" },
+    "name": { "type": "text", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$" },
+    "published": { "type": "date-time" },
+    "publisher": { "$ref": "user.json" },
+    "status": { "$ref": "status.json" },
+    "title": { "type": "text" }
+  },
+  "required": [ "_id", "accesslevel", "name", "status", "title" ]
+}

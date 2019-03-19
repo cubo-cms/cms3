@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://cubo-cms.com/schema/user.json",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "_id": { "type": "integer" },
+    "accesslevel": { "$ref": "accesslevel.json" },
+    "author": { "$ref": "user.json" },
+    "created": { "type": "date-time" },
+    "description": { "type": "text" },
+    "editor": { "$ref": "user.json" },
+    "email": { "type": "text", "format": "email" },
+    "modified": { "type": "date-time" },
+    "name": { "type": "text", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$" },
+    "password": { "type": "text" },
+    "published": { "type": "date-time" },
+    "publisher": { "$ref": "user.json" },
+    "status": { "$ref": "status.json" },
+    "title": { "type": "text" }
+  },
+  "required": [ "_id", "accesslevel", "name", "password", "status", "title" ]
+}

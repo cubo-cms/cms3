@@ -1,0 +1,21 @@
+{
+  "name": "cubo-cms/cms3",
+	"type": "library",
+	"description": "Cubo CMS 3",
+	"keywords": ["cms","mvc","framework"],
+	"homepage": "https://cubo-cms.com/",
+	"time": "2019-03-15",
+  "license": "MIT",
+  "authors": [{
+    "name": "papiando",
+    "email": "info@papiando.com"
+  }],
+  "autoload": {
+    "psr-4": {
+      "Cubo\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.0"
+  }
+}
