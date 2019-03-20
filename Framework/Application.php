@@ -7,7 +7,7 @@
     private $routes;            // Set of routes
 
     // Upon construct initialise the application
-    public function __construct($config = null) {
+    public function __construct($config = 'config') {
       $this->init($config);
     }
 
@@ -41,9 +41,11 @@
     // Initialise the application
     public function init($config = null) {
       // Load configuration
-      $this->configuration = new Set($config);
+      new Configuration($config);
+      $this->configuration = Configuration::get(basename($config, '.json'));
       // Load routes from configuration
-      $this->loadRoutes($this->configuration->get('routes', []));
+      $routes = Configuration::load('routes', $this->configuration->get('routes'));
+      $this->loadRoutes($routes->getAll());
     }
 
     // Load routes from configuration
@@ -59,10 +61,14 @@
     public function run() {
       // Get router object
       $router = $this->getRouter();
+      // Pass application object to router
+      $router->calledBy($this);
       // Invoke controller
-      $router->invokeController();
+      $controller = $router->invokeController();
+      // Pass application object to controller
+      $controller->calledBy($this);
       // Invoke method
-      echo $router->invokeMethod();
+      echo $router->invokeMethod($this);
     }
 
     // Set configuration parameter

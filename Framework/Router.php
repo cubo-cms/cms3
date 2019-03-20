@@ -2,7 +2,8 @@
   namespace Cubo\Framework;
 
   final class Router {
-    private $controller;        // Pointer to Controller object
+    private $caller;            // Pointer to calling object
+    private $controller;        // Pointer to controller object
     private $method;            // Invoked method
     private $params;            // Parameter set
     private $routes;            // Set of routes
@@ -15,6 +16,11 @@
     // Allow returning parameters as JSON
     public function __toString() {
       return (string)$this->params;
+    }
+
+    // Pass calling object
+    public function calledBy($caller = null) {
+      return $caller? $this->caller = $caller: $this->caller;
     }
 
     // Get parameter
@@ -65,7 +71,7 @@
     // Invoke method
     public function invokeMethod() {
       // Invoke controller if not yet invoked
-      empty($this->controller) && $this->invokeController;
+      empty($this->controller) && $this->invokeController();
       try {
         $this->method = $this->params->get('method', 'default');
         if($this->controller->methodExists($this->method)) {
@@ -83,9 +89,9 @@
     // Parse route
     public function parse($uri, $routes = null) {
       is_null($routes) || $this->$routes = $routes;
+      $parts = explode('/', trim(parse_url($uri, PHP_URL_PATH), '/'));
       // Expand url and match to route list
       foreach($this->routes as $route) {
-        $parts = explode('/', trim(parse_url($uri, PHP_URL_PATH), '/'));
         $params = new Set();
         if(count($parts) == count($route->parts)) {
           $matched = true;
@@ -100,7 +106,7 @@
           }
           if($matched) {
             $route->params->merge($params);
-            return $this->params = new Set($route->params->getParams());
+            return $this->params = new Set($route->params->getAll());
           }
         }
       }

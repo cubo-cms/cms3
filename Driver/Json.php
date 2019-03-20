@@ -8,8 +8,9 @@
     private $tables;
 
     // Upon construct save parameters
-    public function __construct($driver, $source) {
-      $this->params = new Set(['driver'=>$driver, 'source'=>$source]);
+    public function __construct($params) {
+      $this->params = $params;
+      print_r($this->params);
     }
 
     // Apply options
@@ -77,7 +78,7 @@
         return $this->tables->$table;
       else {
         try {
-          $file = rtrim($this->params->get('source', './'), DS).DS.$table.'.json';
+          $file = __ROOT__.$this->params->get('source');
           if(file_exists($file)) {
             $contents = file_get_contents($file);
             $this->tables->set($table, json_decode($contents));
@@ -95,7 +96,7 @@
     // Save table to file
     private function saveTable(&$table, &$data) {
       try {
-        $file = rtrim($this->params->get('source', './'), DS).DS.$table.'.json';
+        $file = __ROOT__.$this->params->get('source');
         if(false === file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT)))
           throw Error(['message'=>'file-not-saved']);
       } catch(Error $error) {

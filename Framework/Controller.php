@@ -2,9 +2,10 @@
   namespace Cubo\Framework;
 
   class Controller {
-    protected $model;
-    protected $params;
-    protected $router;
+    protected $caller;          // Pointer to calling object
+    protected $model;           // Pointer to model object
+    protected $params;          // Parameter set
+    protected $router;          // Pointer to router object
 
     // Upon construct save the router
     public function __construct($router) {
@@ -15,6 +16,11 @@
     // Allow returning parameters as JSON
     public function __toString() {
       return (string)$this->params;
+    }
+
+    // Pass calling object
+    public function calledBy($caller = null) {
+      return $caller? $this->caller = $caller: $this->caller;
     }
 
     // Return the router

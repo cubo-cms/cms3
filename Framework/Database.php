@@ -15,16 +15,13 @@
     public function connect($params = null) {
       $this->params = new Set($params);
       try {
-        // Determine if a driver exists by invoking its class
-        if(Driver::exists($this->params->get('driver', 'mysql'))) {
-          echo '<p>Driver found!</p>';
-          // Determine if the source exists
-          if(Driver::sourceExists($this->params->get('driver', 'mysql'), $this->params->get('source', __CUBO__))) {
-            $this->driver = Driver::get($this->params->get('driver', 'mysql'), $this->params->get('source', __CUBO__));
-          } else {
-            throw new Error(['message'=>'database-does-not-exist', 'params'=>$this->params]);
-          }
+        $driver = Driver::className($this->params->get('driver', 'mysql'));
+        // Determine if driver exists
+        if(Driver::exists($driver)) {
+          // Initiate driver
+          return $this->driver = new $driver($this->params);
         } else {
+          // The driver does not exist
           throw new Error(['message'=>'driver-does-not-exist', 'params'=>$this->params]);
         }
       } catch(Error $error) {

@@ -45,7 +45,7 @@
     }
 
     // Return parameter set
-    public function getParams() {
+    public function getAll() {
       return $this->params;
     }
 
@@ -85,7 +85,7 @@
 
     // Merge a parameter list with this one
     public function merge($params) {
-      $this->params = (object)array_merge((array)$this->params, (array)$params->getParams());
+      $this->params = (object)array_merge((array)$this->params, (array)$params->getAll());
     }
 
     // Set parameter

@@ -7,6 +7,12 @@
   class Article extends Controller {
     // Method: all
     public function all() {
+      // Invoke model
+      $model = $this->invokeModel();
+      // Pass controller object to model
+      $model->calledBy($this);
+      // 
+      return 'Showing '.$this->params->get('controller').': ALL... ';
     }
 
     // Method: category
