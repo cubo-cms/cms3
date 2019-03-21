@@ -1,3 +1,17 @@
+/**
+  * @package        cubo-cms/cms
+  * @category       Framework
+  * @version        0.0.1
+  * @copyright      2019 Cubo CMS <https://cubo-cms.com/COPYRIGHT.md>
+  * @license        MIT license <https://cubo-cms.com/LICENSE.md>
+  * @author         papiando
+  * @link           <https://github.com/cubo-cms/cubo-cms>
+  * @description    Application framework class is the core of the web
+  *                 application. In its simplest form, creating an application
+  *                 object and calling the "run" method is enough to have a
+  *                 web application running.
+  *
+  **/
 <?php
   namespace Cubo\Framework;
 
