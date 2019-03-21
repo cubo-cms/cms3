@@ -6,23 +6,9 @@
 
   require('bootstrap.php');
 
-  $app = new Application(__ROOT__.DS.'.config'.DS.'config');
+  $app = new Application;
 
-/*
-  $app->addRoute('/{{controller}}', ['method'=>'all']);
-  $app->addRoute('/{{controller}}/{{name}}', ['method'=>'read']);
-  $app->addRoute('/{{controller}}/read/{{name}}', ['method'=>'read']);
-  $app->addRoute('/{{controller}}/status/{{status}}', ['method'=>'status']);
-  $app->addRoute('/{{controller}}/category/{{category}}', ['method'=>'category']);
-  */
-
-  $router = $app->getRouter();
   $app->run();
-die;
-  //$router->parse($_SERVER['REQUEST_URI']);
-
-  $router->invokeController();
-  echo '<pre>'; echo($router); echo '</pre>';
 die;
 
   //echo '<pre>'; print_r($app); echo '</pre>';

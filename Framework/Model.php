@@ -6,6 +6,7 @@
 
   class Model {
     protected $caller;          // Pointer to calling object
+    protected $data;            // Data set
     protected $database;        // Database configuration
     protected $params;          // Parameter set
 
@@ -40,6 +41,30 @@
       }
     }
 
+    // Method: getById
+    public function getById($id, $properties = null, $options = []) {
+      // Retrieve object from class name
+      $object = $this->getClass();
+      // Construct options
+      $options = (object)array_merge((array)$options, ['filter'=>['_id', $id]]);
+      // Find object
+      $this->data = new Set($this->database->findOne($object, $properties, $options));
+      // Return result as data set
+      return $this->data;
+    }
+
+    // Method: getByName
+    public function getByName($name, $properties = null, $options = []) {
+      // Retrieve object from class name
+      $object = $this->getClass();
+      // Construct options
+      $options = (object)array_merge((array)$options, ['filter'=>['name', $name]]);
+      // Find object
+      $this->data = new Set($this->database->findOne($object, $properties, $options));
+      // Return result as data set
+      return $this->data;
+    }
+
     // Get class name
     public function getClass() {
       return strtolower(basename(str_replace('\\', '/', get_class($this))));
@@ -51,8 +76,13 @@
     }
 
     // Method: get
-    public function get() {
-      //
+    public function get($id, $properties = null, $options = []) {
+      if(is_numeric($id))
+        // Number supplied, get by Id
+        return $this->getById($id, $properties);
+      else
+        // Name supplied, get by Name
+        return $this->getByName($id, $properties);
     }
 
     // Method: all

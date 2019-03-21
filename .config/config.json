@@ -3,8 +3,10 @@
   "title": "My Web App",
   "description": "This is my Web App",
   "author": "papiando",
+  "database": "database.json",
   "routes": {
     "/{{controller}}": { "method": "all" },
+    "/{{controller}}/all": { "method": "all" },
     "/{{controller}}/{{name}}": { "method": "read" },
     "/{{controller}}/read/{{name}}": { "method": "read" },
     "/{{controller}}/status/{{status}}": { "method": "status" },

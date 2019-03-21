@@ -68,7 +68,7 @@
       // Pass application object to controller
       $controller->calledBy($this);
       // Invoke method
-      echo $router->invokeMethod($this);
+      echo $router->invokeMethod($this);            // ****************** CURRENTLY JUST SHOW OUTPUT
     }
 
     // Set configuration parameter

@@ -11,7 +11,7 @@
       $model = $this->invokeModel();
       // Pass controller object to model
       $model->calledBy($this);
-      // 
+      // Get all articles
       return 'Showing '.$this->params->get('controller').': ALL... ';
     }
 
@@ -35,8 +35,12 @@
 
     // Method: view
     public function view() {
+      // Invoke model
       $model = $this->invokeModel();
-      return 'Showing '.$this->params->get('controller').': '.$this->params->get('name');
+      // Pass controller object to model
+      $model->calledBy($this);
+      // Get article by name
+      return $model->get($this->params->get('name'));
     }
   }
 ?>

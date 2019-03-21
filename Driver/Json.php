@@ -10,7 +10,6 @@
     // Upon construct save parameters
     public function __construct($params) {
       $this->params = $params;
-      print_r($this->params);
     }
 
     // Apply options
@@ -84,7 +83,7 @@
             $this->tables->set($table, json_decode($contents));
             return $this->tables->$table;
           } else {
-            throw Error(['message'=>'file-not-found']);
+            throw new Error(['message'=>'file-not-found']);
           }
         } catch(Error $error) {
           $error->render();
@@ -98,7 +97,7 @@
       try {
         $file = __ROOT__.$this->params->get('source');
         if(false === file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT)))
-          throw Error(['message'=>'file-not-saved']);
+          throw new Error(['message'=>'file-not-saved']);
       } catch(Error $error) {
         $error->render();
       }
